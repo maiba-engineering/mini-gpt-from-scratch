@@ -20,13 +20,9 @@ from pathlib import Path
 
 
 # TOKENIZER 
-# 
-# Le tokenizer le plus simple possible : chaque caractère unique
+#le plus simple possible : chaque caractère unique
 # du texte reçoit un numéro (index). "a" → 0, "b" → 1, etc.
-#
-# Les vrais LLMs utilisent des tokenizers plus sophistiqués
-# (BPE, SentencePiece) qui découpent en sous-mots, mais le
-# tokenizer caractère suffit pour comprendre l'architecture.
+
 
 
 class CharTokenizer:
@@ -59,7 +55,7 @@ class CharTokenizer:
 #   - Key (K)   : "qu'est-ce que je contiens ?"
 #   - Value (V) : "qu'est-ce que je transmets ?"
 #
-# Le score d'attention entre deux tokens = Q · K^T / √d
+# score d'attention entre deux tokens = Q · K^T / √d
 # Plus le score est élevé, plus un token "fait attention" à l'autre.
 #
 # Masque causal empêche un token de tricher
