@@ -1,17 +1,9 @@
 # Mini-GPT from Scratch
 
-Transformer decoder-only (type GPT) implemented from scratch in PyTorch. No HuggingFace, no shortcuts — every component is written by hand to understand how LLMs actually work.
+Transformer decoder-only (type GPT) implemented from scratch in PyTorch. 
 
 Built as part of my engineering project at CentraleSupélec, heavily inspired by [Andrej Karpathy's "Let's build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY).
 
-## What's implemented
-
-- Character-level tokenizer
-- Token + positional embeddings
-- Multi-head self-attention with causal mask
-- Transformer blocks (attention → feedforward → residual + layernorm)
-- Autoregressive text generation with temperature control
-- CLI to experiment with architecture hyperparameters
 
 ## Usage
 
@@ -54,9 +46,3 @@ The model is intentionally small (~0.5M-5M params) so you can train on CPU/lapto
 - Python 3.10+
 - PyTorch
 
-## TODO
-
-- [ ] Compare positional encoding methods (sinusoidal vs learned vs RoPE)
-- [ ] Add BPE tokenizer (subword-level instead of character-level)
-- [ ] Measure long-range dependency capture across configs
-- [ ] Training loss plots with matplotlib
