@@ -1,0 +1,62 @@
+# Mini-GPT from Scratch
+
+Transformer decoder-only (type GPT) implemented from scratch in PyTorch. No HuggingFace, no shortcuts — every component is written by hand to understand how LLMs actually work.
+
+Built as part of my engineering project at CentraleSupélec, heavily inspired by [Andrej Karpathy's "Let's build GPT"](https://www.youtube.com/watch?v=kCc8FmEb1nY).
+
+## What's implemented
+
+- Character-level tokenizer
+- Token + positional embeddings
+- Multi-head self-attention with causal mask
+- Transformer blocks (attention → feedforward → residual + layernorm)
+- Autoregressive text generation with temperature control
+- CLI to experiment with architecture hyperparameters
+
+## Usage
+
+```bash
+# download a dataset (e.g. Shakespeare)
+wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
+
+# train with default config
+python model.py
+
+# experiment with architecture
+python model.py --n_heads 8 --n_embd 128 --n_layer 6
+python model.py --n_heads 1 --n_embd 64     # single head vs multi-head
+python model.py --block_size 256             # longer context window
+```
+
+## Architecture
+
+```
+Input tokens → Token Embedding + Position Embedding
+    → Transformer Block × N
+        → LayerNorm → Multi-Head Attention → Residual
+        → LayerNorm → FeedForward → Residual
+    → LayerNorm → Linear → Logits → Next token prediction
+```
+
+## Experiments
+
+The model is intentionally small (~0.5M-5M params) so you can train on CPU/laptop and iterate fast. Things to try:
+
+| Experiment | Command | What to observe |
+|---|---|---|
+| 1 head vs 4 heads | `--n_heads 1` vs `--n_heads 4` | Does multi-head attention help? |
+| Small vs large embeddings | `--n_embd 32` vs `--n_embd 256` | Quality vs training speed tradeoff |
+| Shallow vs deep | `--n_layer 2` vs `--n_layer 8` | When does depth stop helping? |
+| Short vs long context | `--block_size 64` vs `--block_size 256` | Impact on long-range coherence |
+
+## Stack
+
+- Python 3.10+
+- PyTorch
+
+## TODO
+
+- [ ] Compare positional encoding methods (sinusoidal vs learned vs RoPE)
+- [ ] Add BPE tokenizer (subword-level instead of character-level)
+- [ ] Measure long-range dependency capture across configs
+- [ ] Training loss plots with matplotlib
