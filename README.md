@@ -20,15 +20,6 @@ python model.py --n_heads 1 --n_embd 64     # single head vs multi-head
 python model.py --block_size 256             # longer context window
 ```
 
-## Architecture
-
-```
-Input tokens → Token Embedding + Position Embedding
-    → Transformer Block × N
-        → LayerNorm → Multi-Head Attention → Residual
-        → LayerNorm → FeedForward → Residual
-    → LayerNorm → Linear → Logits → Next token prediction
-```
 
 ## Experiments
 
